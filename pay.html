@@ -8,20 +8,15 @@
 <body>
   <div id="title" class="container">
     <h1>RANDOM</h1>
-    <p id="location">New York City</p>
+    <p id="location">Manhattan, NYC</p>
     <h3>IN RANDOM WE TRUST</h3>
     <p>
       One random night with random people doing random tasks.<br/>
       Learn about yourself, open up and let the randomness in.
     </p>
-    <form action="https://formspree.io/random@randomny.com" method="POST" id="signup"/>
-      <input type="text" name="name" placeholder="Full name" maxlength="100" />
-      <input type="email" name="email" placeholder="Email" maxlength="100" />
-      <input type="submit" value="SIGNUP"/>
-    </form>
   </div>
 
-  <div class="container">
+  <div id="title" class="container">
     <h3>EXPERIENCE LETTING GO</h3>
     <p class="info">
       Imagine a world with a parallel social reality; a world in which every role and every action is determined by random, blind fate; where everything is given and nothing known; a world dominated by an all-consuming Lottery.<br/>
@@ -32,15 +27,29 @@
     </p>
   </div>
 
-
   <div class="container">
-    <h3>HOW DOES IT WORK?</h3>
-    <p><a href="#signup">Signup</a> to request an invite -> But a ticket -> Enter the Random</p>
+    <h3>SIGN UP FOR THE EXPERIMENT</h3>
+    <form action="" method="">
+      <input type="text" name="name" placeholder="Full name" />
+      <input type="email" name="email" placeholder="Email" />
+      <input type="submit" value="SIGNUP"/>
+    </form>
   </div>
 
-  <footer>
-    <a href="/">Home</a> | <a href="/faq">FAQ</a> | <a href="/about">About</a>
-  </footer>
+  <h3>HOW DOES IT WORK?</h3>
+  <div>
+    <form action="https://us-central1-random-4ed20.cloudfunctions.net/charge" method="POST">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_htAnvA3q3J0hnMxURCtCPPa5"
+        data-amount="4000"
+        data-name="random"
+        data-description="Widget"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto">
+      </script>
+    </form>
+  </div>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128025517-1"></script>
