@@ -78,6 +78,10 @@ a {
 }
 
 
+#how h3 {
+  color: #28f5b3;
+}
+
 #how .step {
   width: 200px;
   display: inline-block;
