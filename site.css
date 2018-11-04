@@ -1,8 +1,7 @@
 body {
   background-color: black;
   color: white;
-  /*font-family: 'Nova Mono', monospace;*/
-  font-family: 'Baloo', cursive;
+  font-family: 'Nova Mono', monospace;
   /*font-family: 'Muli', sans-serif;*/
   font-size: 16px;
 }
