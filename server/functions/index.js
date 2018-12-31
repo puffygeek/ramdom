@@ -1,4 +1,4 @@
-const mailgun_key = 'key-ef32201409d6512e901d9676cb3c7cfb';
+const mailgun_key = 'key-aa';
 const domain = 'randomny.com';
 const mailgun = require('mailgun-js')({apiKey: mailgun_key, domain: domain});
 
