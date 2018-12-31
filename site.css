@@ -55,11 +55,10 @@ a {
 }
 
 #signup input[type="submit"]{
-  background-color:  #242424;
+  background-color: #28f5b3;
+  color: #242424;
   width: 100px;
-  color: white;
   cursor: pointer;
-  color: #28f5b3
 }
 
 #info {
@@ -106,17 +105,11 @@ footer {
 }
 
 #checkout-button{
-  width: 100px;
+  width: 140px;
   color: white;
   cursor: pointer;
   padding: 5px;
-}
-
-.buy button {
   font-size: 16px;
-  color: #28f5b3;
-  background-color:  #242424;
-}
-
-#checkout-button {
+  background-color: #28f5b3;
+  color: #242424;
 }
