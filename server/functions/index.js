@@ -1,10 +1,8 @@
 const functions = require('firebase-functions');
-const mailgun = require('mailgun-js')({apiKey: mailgun_key, domain: domain});
-
-const domain = 'randomny.com';
-const mailgun_key = functions.config().mailgun.key;
+const mailgun = require('mailgun-js')({apiKey: functions.config().mailgun.key, domain: 'randomny.com'});
 const stripe = require('stripe')(functions.config().stripe.key);
-const amount = 40 * 100;
+
+const amount = 45 * 100;
 
 exports.charge = functions.https.onRequest((req, res) => {
   stripe.charges.create({
@@ -40,8 +38,4 @@ See you soon
     console.log('email sent', body)
     return res.send('ok!');
   });
-});
-
-mailgun.messages().send({from: 'RANDOM <hello@randomny.com>', to: 'sagiv4@gmail.com', subject: 'hi'}, (error, body) => {
-  console.log('email sent', body)
 });
