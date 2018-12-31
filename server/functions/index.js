@@ -1,8 +1,8 @@
-const mailgun_key = 'key-aa';
-const domain = 'randomny.com';
+const functions = require('firebase-functions');
 const mailgun = require('mailgun-js')({apiKey: mailgun_key, domain: domain});
 
-const functions = require('firebase-functions');
+const domain = 'randomny.com';
+const mailgun_key = functions.config().mailgun.key;
 const stripe = require('stripe')(functions.config().stripe.key);
 const amount = 40 * 100;
 
@@ -40,4 +40,8 @@ See you soon
     console.log('email sent', body)
     return res.send('ok!');
   });
+});
+
+mailgun.messages().send({from: 'RANDOM <hello@randomny.com>', to: 'sagiv4@gmail.com', subject: 'hi'}, (error, body) => {
+  console.log('email sent', body)
 });

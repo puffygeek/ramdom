@@ -1,0 +1,11 @@
+[debug] [2018-12-31T21:12:44.210Z] ----------------------------------------------------------------------
+[debug] [2018-12-31T21:12:44.212Z] Command:       /Users/sagivo/.nvm/versions/node/v10.12.0/bin/node /Users/sagivo/.nvm/versions/node/v10.12.0/bin/firebase functions:config:set maulgun.key = key-5e56cc5fc66c2eb3ac30ae6e4bb4a27e
+[debug] [2018-12-31T21:12:44.212Z] CLI Version:   6.2.2
+[debug] [2018-12-31T21:12:44.212Z] Platform:      darwin
+[debug] [2018-12-31T21:12:44.212Z] Node Version:  v10.12.0
+[debug] [2018-12-31T21:12:44.213Z] Time:          Mon Dec 31 2018 16:12:44 GMT-0500 (Eastern Standard Time)
+[debug] [2018-12-31T21:12:44.213Z] ----------------------------------------------------------------------
+[debug] 
+[error] 
+[error] Error: No project active. Run with --project <projectId> or define an alias by
+running firebase use --add
