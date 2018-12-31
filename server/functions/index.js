@@ -1,5 +1,8 @@
-const functions = require('firebase-functions');
+const mailgun_key = 'key-ef32201409d6512e901d9676cb3c7cfb';
+const domain = 'randomny.com';
+const mailgun = require('mailgun-js')({apiKey: mailgun_key, domain: domain});
 
+const functions = require('firebase-functions');
 const stripe = require('stripe')(functions.config().stripe.key);
 const amount = 40 * 100;
 
@@ -8,12 +11,33 @@ exports.charge = functions.https.onRequest((req, res) => {
     amount,
     description: 'Random',
     currency: 'usd',
-    source: req.body.stripeToken
+    source: req.body.stripeToken,
+    receipt_email: req.body.stripeEmail,
   }).then(chargeRes => {
     console.log('charge completed', chargeRes);
     return res.send('Thank you, please check your email soon!');
   }).catch(err => {
     console.error('charge error', err);
     return res.send('oops!');
+  });
+});
+
+exports.webhook = functions.https.onRequest((req, res) => {
+  console.log(req.body);
+  const email = req.body.data.object.receipt_email;
+
+   const data = {
+    from: 'RANDOM <hello@randomny.com>',
+    to: email,
+    subject: 'Random event details',
+    text: `Now we can tell you the full details:
+Midtown Manhattan 2/7/19 at 7pm
+See you soon
+    `,
+  };
+
+  mailgun.messages().send(data, (error, body) => {
+    console.log('email sent', body)
+    return res.send('ok!');
   });
 });

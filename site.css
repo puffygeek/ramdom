@@ -94,3 +94,29 @@ footer {
   text-align: center;
   font-size: 14px;
 }
+
+/* buy */
+#buy-box div{
+  margin: 10px;
+  text-align: center;
+}
+
+#tickets-num {
+  width: 30px;
+}
+
+#checkout-button{
+  width: 100px;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.buy button {
+  font-size: 16px;
+  color: #28f5b3;
+  background-color:  #242424;
+}
+
+#checkout-button {
+}
