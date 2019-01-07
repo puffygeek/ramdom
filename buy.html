@@ -11,42 +11,49 @@
     <img src="images/mask.png">
     <h1>RANDOM</h1>
     <p id="location">Midtown Manhattan, NYC<br/> Thursday 2/7/19 7pm</p>
-    <h3>$45 per ticket</h3>
+    <!-- <h3>$45 per ticket</h3> -->
   </div>
 
   <div class="container buy" id="info">
     <h3>BUY TICKETS NOW</h3>
     <p>
-      Try a new experience that might change your life. Once you purchase we will reserve a spot for you in the next event. Please use your real name when ordering a ticket. You will also get an email with the exact location details. See you soon.
+      Congrats, you're ready to get outside of your comfort zone and join the Random.<br/>
+      Once you purchase a ticket we will reserve a spot for you in the next event. Please use your real name when ordering. You will also get an email with the exact location details.<br/>
+      See you soon.
     </p>
-      <div id="buy-box">
-        <div>
-          Quantity:
-          <select id="tickets-number" onchange="updateTot(this)">
-            <option value="1" selected="selected">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </div>
-        <div>Total: <span id="total-text">$45</span></div>
-        <div><button id="checkout-button">BUY</button></div>
-        <div id="error-message"></div>
+    <div id="buy-box">
+      <div>
+        Quantity:
+        <select id="tickets-number" onchange="updateTot(this)">
+          <option value="1" selected="selected">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
       </div>
-    </p>
+      <div>Total: <span id="total-text">$45</span></div>
+      <div><button id="checkout-button">BUY</button></div>
+      <div id="error-message"></div>
+    </div>
   </div>
 
-  <div class="container">
+  <div class="container mid-small">
     <h3>FAQ</h3>
-    <h5>Where is the location?</h5>
-    <p>In order to keep the event private, you will get an email with exact location details after you purchase a ticket. We can only say that it will be in midtown Manhattan in New York Ciry.</p>
-    <h5>Do I need to bring anything?</h5>
+    <h5>Q: Where is the location?</h5>
+    <p>Upon paying, you will receive an email receipt, and a separate email explaining the next steps and giving you the exact address. We can only say it's in midtown Manhattan NYC.</p>
+    <h5>Q: Do I need to bring anything?</h5>
     <p>Just yourself, a friend or two and open mind to experience a unique concept.</p>
-    <h5>Any refunds?</h5>
-    <o>Tickets are not refundable nor transferable.</o>
-    <h5>Where can I learn more about what it is?</h5>
+    <h5>Q: Any refunds?</h5>
+    <o>A: Tickets are not refundable nor transferable. Random has chosen you and counts on you to make the experience good for everyone.</o>
+    <h5>Q: Are payments secure?</h5>
+    <o>A: Your payment goes through <a href="//stripe.com" target="_blank">Stripe</a>, a fast and secure internet payment company which uses the highest security standards and being used by many major tech companies all over the world.</o>
+    <h5>Q: Where can I learn more about what it is?</h5>
     <p>You can read more <a href="//randomny.com">here</a></p>
   </div>
+
+  <footer>
+    When was the last time you tried something Random?
+  </footer>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128025517-1"></script>
@@ -59,17 +66,17 @@
   gtag('config', 'UA-128025517-1');
 
   // STRIPE
-  // pk_test_htAnvA3q3J0hnMxURCtCPPa5
-  var stripe = Stripe('pk_live_sbAsBiITcajeJTItipIaBGmP', {
+  var stripe = Stripe('pk_test_htAnvA3q3J0hnMxURCtCPPa5', {
+  // var stripe = Stripe('pk_live_sbAsBiITcajeJTItipIaBGmP', {
     betas: ['checkout_beta_4']
   });
 
   var checkoutButton = document.getElementById('checkout-button');
   checkoutButton.addEventListener('click', function () {
-    // sku_EFfJi0xfeCtQeq
     stripe.redirectToCheckout({
-      items: [{sku: 'sku_EFnd20YnaIzju7', quantity: parseInt(document.getElementById('tickets-number').value, 10) }],
-
+      items: [{sku: 'sku_EFfJi0xfeCtQeq',
+      // items: [{sku: 'sku_EFnd20YnaIzju7',
+      quantity: parseInt(document.getElementById('tickets-number').value, 10) }],
       successUrl: 'https://randomny.com/thanks.html',
       cancelUrl: 'https://randomny.com',
     })

@@ -113,3 +113,8 @@ footer {
   background-color: #28f5b3;
   color: #242424;
 }
+
+.mid-small {
+  max-width: 700px;
+  margin: auto;
+}
