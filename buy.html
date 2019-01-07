@@ -4,6 +4,9 @@
   <title>Buy Tickets</title>
   <link rel="stylesheet" type="text/css" href="site.css">
   <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Nova+Mono|Muli" rel="stylesheet">
+  <meta name="description" content="Get outside of your comfort zone and join the Random. One Random night with Random people doing Random tasks. In Random we trust.">
+  <meta name="keywords" content="Random, NYC, Random night, new york random, experiance, show, experimental, activity">
+  <meta property="og:image" content="images/mask.png">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 </head>
 <body>
@@ -66,16 +69,16 @@
   gtag('config', 'UA-128025517-1');
 
   // STRIPE
-  // var stripe = Stripe('pk_test_htAnvA3q3J0hnMxURCtCPPa5', {
-  var stripe = Stripe('pk_live_sbAsBiITcajeJTItipIaBGmP', {
+  var stripe = Stripe('pk_test_htAnvA3q3J0hnMxURCtCPPa5', {
+  // var stripe = Stripe('pk_live_sbAsBiITcajeJTItipIaBGmP', {
     betas: ['checkout_beta_4']
   });
 
   var checkoutButton = document.getElementById('checkout-button');
   checkoutButton.addEventListener('click', function () {
     stripe.redirectToCheckout({
-      // items: [{sku: 'sku_EFfJi0xfeCtQeq',
-      items: [{sku: 'sku_EFnd20YnaIzju7',
+      items: [{sku: 'sku_EFfJi0xfeCtQeq',
+      // items: [{sku: 'sku_EFnd20YnaIzju7',
       quantity: parseInt(document.getElementById('tickets-number').value, 10) }],
       successUrl: 'https://randomny.com/thanks.html',
       cancelUrl: 'https://randomny.com',
