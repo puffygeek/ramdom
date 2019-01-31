@@ -61,7 +61,7 @@ a {
   cursor: pointer;
 }
 
-#info {
+.info {
   margin: 20px auto;
   padding: 10px 30px;
   color: black;

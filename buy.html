@@ -13,11 +13,16 @@
   <div id="title" class="container">
     <img src="images/mask.png">
     <h1>RANDOM</h1>
-    <p id="location">Midtown Manhattan, NYC<br/> Thursday 2/7/19 8pm</p>
+    <p id="location">Midtown Manhattan, NYC</p>
     <!-- <h3>$45 per ticket</h3> -->
   </div>
 
-  <div class="container buy" id="info">
+  <div class="container buy info" id="soldout" style="display:none;">
+    <h3>Sold Out :(</h3>
+    <p>This is an exclusive event and all tickets are sold out. But don't worry stranger, you will have your chance soon. We will keep you posted...</p>
+  </div>
+
+  <div class="container buy info" id="buy">
     <h3>BUY TICKETS NOW</h3>
     <p>
       Congratulations, you're ready to get outside of your comfort zone and join the Random.<br/>
@@ -25,6 +30,11 @@
       See you soon.
     </p>
     <div id="buy-box">
+      <div>
+        Date:
+        <select id="dates"">
+        </select>
+      </div>
       <div>
         Quantity:
         <select id="tickets-number" onchange="updateTot(this)">
@@ -121,6 +131,39 @@ window['_fs_namespace'] = 'FS';
     g.clearUserCookie=function(){};
 })(window,document,window['_fs_namespace'],'script','user');
 </script>
+
+
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+<script>
+  var config = {
+    apiKey: "AIzaSyChuvxW2N5RUh7oyWslp1dB4F39W4IfCu8",
+    authDomain: "random-4ed20.firebaseapp.com",
+    databaseURL: "https://random-4ed20.firebaseio.com",
+    projectId: "random-4ed20",
+    storageBucket: "random-4ed20.appspot.com",
+    messagingSenderId: "650405186723"
+  };
+  firebase.initializeApp(config);
+
+  var db = firebase.firestore(); db.settings({ timestampsInSnapshots: true });
+
+  db.collection('events').get().then((querySnapshot) => {
+    let empty = true;
+    const $date = document.getElementById('dates');
+    querySnapshot.forEach((doc) => {
+      if (doc.data().tickets > 0) {
+        empty = false;
+        $date.insertAdjacentHTML('beforeend', `<option value="${doc.data().time}">${doc.data().time}</option>`);
+      }
+    });
+    if (empty) {
+      document.getElementById('buy').style.display = 'none';
+      document.getElementById('soldout').style.display = 'block';
+    }
+  }).catch(console.log);
+</script>
+
 
 </body>
 </html>
