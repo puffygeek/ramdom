@@ -45,7 +45,7 @@ exports.webhook = functions.https.onRequest((req, res) => {
   const email = req.body.data.object.receipt_email;
 
    const data = {
-    from: 'RANDOM <hello@randomny.com>',
+    from: 'RANDOM <random@randomny.com>',
     to: email,
     subject: 'Congratulations! You are ready to join the Random',
     text: TEXT,
