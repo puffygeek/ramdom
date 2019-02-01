@@ -13,11 +13,12 @@
     "firebase-admin": "*",
     "firebase-functions": "*",
     "mailgun-js": "*",
-    "stripe": "*"
+    "stripe": "*",
+    "mixpanel": "*"
   },
   "devDependencies": {
-    "eslint": "^4.12.0",
-    "eslint-plugin-promise": "^3.6.0"
+    "eslint": "*",
+    "eslint-plugin-promise": "*"
   },
   "private": true
 }

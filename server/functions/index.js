@@ -1,6 +1,11 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 const mailgun = require('mailgun-js')({apiKey: functions.config().mailgun.key, domain: 'randomny.com'});
 const stripe = require('stripe')(functions.config().stripe.key);
+const mixpanel = require('mixpanel').init(functions.config().mixpanel.key);
+
+admin.initializeApp(functions.config().firebase);
+const db = admin.firestore();
 
 const amount = 45 * 100;
 
@@ -18,6 +23,20 @@ exports.charge = functions.https.onRequest((req, res) => {
     console.error('charge error', err);
     return res.send('oops!');
   });
+});
+
+exports.createUser = functions.https.onRequest((req, res) => {
+  db.collection('users').doc(req.body.email).set({
+    name: req.body.name,
+    email: req.body.email,
+    created: admin.firestore.FieldValue.serverTimestamp(),
+  }, { merge: true })
+  .then(() => mixpanel.people.set_once(req.body.email, { '$email': req.body.email, '$name': req.body.name, '$created': (new Date()).toISOString() }))
+  .then(() => res.redirect('https://www.randomny.com/buy'))
+  .catch((err) => {
+    console.error(err);
+    res.redirect('https://www.randomny.com/');
+  })
 });
 
 exports.webhook = functions.https.onRequest((req, res) => {
