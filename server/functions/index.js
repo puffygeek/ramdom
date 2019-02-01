@@ -32,11 +32,12 @@ exports.createUser = functions.https.onRequest((req, res) => {
     created: admin.firestore.FieldValue.serverTimestamp(),
   }, { merge: true })
   .then(() => mixpanel.people.set_once(req.body.email, { '$email': req.body.email, '$name': req.body.name, '$created': (new Date()).toISOString() }))
+  .then(() => mailgun.messages().send({ from: 'RANDOM <hello@randomny.com>', to: 'random@randomny.com', subject: `NEW USER - ${req.body.name}`, text: `${req.body.name} - ${req.body.email}` }))
   .then(() => res.redirect('https://www.randomny.com/buy'))
   .catch((err) => {
     console.error(err);
     res.redirect('https://www.randomny.com/');
-  })
+  });
 });
 
 exports.webhook = functions.https.onRequest((req, res) => {
