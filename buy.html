@@ -148,7 +148,7 @@ window['_fs_namespace'] = 'FS';
 
   var db = firebase.firestore(); db.settings({ timestampsInSnapshots: true });
 
-  db.collection('events').get().then((querySnapshot) => {
+  db.collection('events').orderBy('order').get().then((querySnapshot) => {
     let empty = true;
     const $date = document.getElementById('dates');
     querySnapshot.forEach((doc) => {
