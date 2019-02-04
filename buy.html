@@ -32,7 +32,7 @@
     <div id="buy-box">
       <div>
         Date:
-        <select id="dates"">
+        <select id="dates">
         </select>
       </div>
       <div>
@@ -47,7 +47,6 @@
       <div>Total: <span id="total-text">$45</span></div>
       <div><button id="checkout-button">BUY</button></div>
       <div id="error-message"></div>
-      <div>By buying you agree to the <a href="/terms">terms</a>.</div>
     </div>
   </div>
 
@@ -63,6 +62,8 @@
     <o>A: Your payment goes through <a href="//stripe.com" target="_blank">Stripe</a>, a fast and secure internet payment company which uses the highest security standards and is being used by many major tech companies all over the world.</o>
     <h5>Q: Where can I learn more about what it is?</h5>
     <p>You can read more <a href="//randomny.com">here</a></p>
+    <h5>Q: What are the terms?</h5>
+    <div>You can find them <a href="/terms">here</a>.</div>
   </div>
 
   <footer>
@@ -86,11 +87,14 @@
   });
 
   var checkoutButton = document.getElementById('checkout-button');
+  var dateSelected = document.getElementById('dates').value;
+
   checkoutButton.addEventListener('click', function () {
     stripe.redirectToCheckout({
       // items: [{sku: 'sku_EFfJi0xfeCtQeq',
       items: [{sku: 'sku_EFnd20YnaIzju7',
       quantity: parseInt(document.getElementById('tickets-number').value, 10) }],
+      clientReferenceId: dateSelected,
       successUrl: 'https://randomny.com/thanks.html',
       cancelUrl: 'https://randomny.com',
     })
