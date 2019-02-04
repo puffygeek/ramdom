@@ -42,6 +42,33 @@ exports.createUser = functions.https.onRequest((req, res) => {
 
 exports.webhook = functions.https.onRequest((req, res) => {
   console.log(req.body);
+
+  if (req.body.type === 'checkout_beta.session_succeeded') {
+    const payment = req.body.data.object.payment_intent;
+    const d = req.body.data.object.client_reference_id;
+
+    db.collection('payments').doc(payment).get().then((doc) => {
+      const email = doc.data().email;
+      mixpanel.people.append(email, { event_time: d.split('|')[0], tickets: d.split('|')[1] });
+
+      db.collection('payments').doc(req.body.data.object.payment_intent).set({
+        data: d,
+      }, { merge: true });
+      return res.send('ok!');
+    }).catch(console.error);
+  } else if (req.body.type === 'charge.succeeded') {
+    const email = req.body.data.object.receipt_email;
+    const amount = req.body.data.object.amount / 100;
+
+    mixpanel.people.append(email, { amount: amount });
+
+    db.collection('payments').doc(req.body.data.object.payment_intent).set({
+      email: email,
+      amount: amount,
+    }, { merge: true })
+  }
+
+
   const email = req.body.data.object.receipt_email;
 
    const data = {
@@ -52,10 +79,10 @@ exports.webhook = functions.https.onRequest((req, res) => {
     html: HTML,
   };
 
-  mailgun.messages().send(data, (error, body) => {
-    console.log('email sent', body)
-    return res.send('ok!');
-  });
+  // mailgun.messages().send(data, (error, body) => {
+  //   console.log('email sent', body)
+  //   return res.send('ok!');
+  // });
 });
 
 const TEXT = `

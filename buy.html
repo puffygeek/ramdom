@@ -74,12 +74,6 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128025517-1"></script>
 <script src="https://js.stripe.com/v3"></script>
 <script>
-  // ga
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-128025517-1');
-
   // STRIPE
   // var stripe = Stripe('pk_test_htAnvA3q3J0hnMxURCtCPPa5', {
   var stripe = Stripe('pk_live_sbAsBiITcajeJTItipIaBGmP', {
@@ -87,18 +81,23 @@
   });
 
   var checkoutButton = document.getElementById('checkout-button');
-  var dateSelected = document.getElementById('dates').value;
 
   checkoutButton.addEventListener('click', function () {
+    var quantity = parseInt(document.getElementById('tickets-number').value, 10);
+    var data = document.getElementById('dates').value + '|' + quantity;
+    console.log('??', data);
+
     stripe.redirectToCheckout({
       // items: [{sku: 'sku_EFfJi0xfeCtQeq',
       items: [{sku: 'sku_EFnd20YnaIzju7',
-      quantity: parseInt(document.getElementById('tickets-number').value, 10) }],
-      clientReferenceId: dateSelected,
+      quantity: quantity,
+      }],
+      clientReferenceId: data,
       successUrl: 'https://randomny.com/thanks.html',
       cancelUrl: 'https://randomny.com',
     })
     .then(function (result) {
+      console.log(result)
       if (result.error) {
         var displayError = document.getElementById('error-message');
         displayError.textContent = result.error.message;
@@ -110,6 +109,12 @@
   function updateTot(el) {
     document.getElementById('total-text').innerText = '$' + el.value * 45;
   }
+
+    // ga
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-128025517-1');
 
 
 // mixpanel
