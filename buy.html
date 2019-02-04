@@ -81,8 +81,8 @@
   gtag('config', 'UA-128025517-1');
 
   // STRIPE
-  var stripe = Stripe('pk_test_htAnvA3q3J0hnMxURCtCPPa5', {
-  // var stripe = Stripe('pk_live_sbAsBiITcajeJTItipIaBGmP', {
+  // var stripe = Stripe('pk_test_htAnvA3q3J0hnMxURCtCPPa5', {
+  var stripe = Stripe('pk_live_sbAsBiITcajeJTItipIaBGmP', {
     betas: ['checkout_beta_4']
   });
 
@@ -91,8 +91,8 @@
 
   checkoutButton.addEventListener('click', function () {
     stripe.redirectToCheckout({
-      items: [{sku: 'sku_EFfJi0xfeCtQeq',
-      // items: [{sku: 'sku_EFnd20YnaIzju7',
+      // items: [{sku: 'sku_EFfJi0xfeCtQeq',
+      items: [{sku: 'sku_EFnd20YnaIzju7',
       quantity: parseInt(document.getElementById('tickets-number').value, 10) }],
       clientReferenceId: dateSelected,
       successUrl: 'https://randomny.com/thanks.html',
