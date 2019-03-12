@@ -66,6 +66,8 @@ exports.webhook = functions.https.onRequest((req, res) => {
       email: email,
       amount: amount,
     }, { merge: true })
+  } else {
+    return res.send('ok!');
   }
 
 
@@ -83,6 +85,7 @@ exports.webhook = functions.https.onRequest((req, res) => {
   //   console.log('email sent', body)
   //   return res.send('ok!');
   // });
+  return res.send('ok!');
 });
 
 const TEXT = `
